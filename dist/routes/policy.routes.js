@@ -1,0 +1,10 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const PolicyController_1 = require("../controllers/PolicyController");
+const auth_1 = require("../middleware/auth");
+const router = (0, express_1.Router)();
+router.post('/', auth_1.authMiddleware, PolicyController_1.PolicyController.createPolicy);
+router.get('/user/:userId', auth_1.authMiddleware, PolicyController_1.PolicyController.getUserPolicies);
+router.get('/all', auth_1.authMiddleware, auth_1.adminMiddleware, PolicyController_1.PolicyController.getAllPolicies);
+exports.default = router;
