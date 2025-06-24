@@ -1,0 +1,10 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const ClaimController_1 = require("../controllers/ClaimController");
+const auth_1 = require("../middleware/auth");
+const router = (0, express_1.Router)();
+router.post('/', auth_1.authMiddleware, ClaimController_1.ClaimController.createClaim);
+router.get('/user/:userId', auth_1.authMiddleware, ClaimController_1.ClaimController.getUserClaims);
+router.patch('/:claimId/status', auth_1.authMiddleware, auth_1.adminMiddleware, ClaimController_1.ClaimController.updateClaimStatus);
+exports.default = router;
